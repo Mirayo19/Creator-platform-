@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* Design tokens — one accent (indigo), neutral surfaces. Light default, dark via system or toggle. */
+:root {
+  --bg: #fafafb;
+  --surface: #ffffff;
+  --surface-2: #f4f4f6;
+  --border: #e6e6ea;
+  --text: #16161a;
+  --muted: #6b6b76;
+  --accent: #5b5bd6;
+  --accent-soft: #eeeefc;
+  --accent-text: #ffffff;
+  --good: #1a7f4b;
+  --good-soft: #e5f5ec;
+  --warn: #a15c07;
+  --warn-soft: #fdf0dc;
+  --bad: #c0392b;
+  --bad-soft: #fcebe9;
+}
+:root[data-theme="dark"] {
+  --bg: #0e0e11;
+  --surface: #15151a;
+  --surface-2: #1c1c22;
+  --border: #272730;
+  --text: #ececf1;
+  --muted: #9494a1;
+  --accent: #8484f0;
+  --accent-soft: #22223d;
+  --accent-text: #0e0e11;
+  --good: #4cc38a;
+  --good-soft: #14281f;
+  --warn: #e9b05a;
+  --warn-soft: #2d2412;
+  --bad: #ee7b6f;
+  --bad-soft: #2e1916;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-text: var(--accent-text);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+html { color-scheme: light dark; }
+html[data-theme="light"] { color-scheme: light; }
+html[data-theme="dark"] { color-scheme: dark; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+*:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.animate-in { animation: fade-in .25s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in { animation: none; }
+  * { transition: none !important; }
+}
