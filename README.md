@@ -65,6 +65,10 @@ supabase/migrations/0001_init.sql   schema + RLS
 3. `npm install && npm run dev`
 4. Sign up → onboarding → Content Library. Use **Load sample data** to explore; it is labelled *Sample* everywhere and removable.
 
+## Tests
+
+`npm test` (Vitest, no credentials needed). Claude is mocked and Supabase is an in-memory fake, while the real analysis code runs. Covers import parsing, the never-invent-metrics rules, SSRF guard, minimum-data thresholds, evidence-citation integrity, draft-suggestion applicability, versioned persistence and the Claude JSON retry logic. CI runs typecheck, lint and tests on every push. Not covered: real Claude output quality, real Supabase/RLS (verified manually against Postgres) and UI flows.
+
 ## Adding a platform
 
 Implement `PlatformIntegration` (`src/lib/integrations/types.ts`) and register it in `integrations/index.ts`. Tokens go in `platform_credentials` via the service role only. Sync must use the platform's official API.
